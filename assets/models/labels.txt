@@ -1,0 +1,6 @@
+Apple_scab
+Cherry_powdery_mildew
+Grape_black_rot
+Maize_gray_leaf_spot
+Potato_Early_blight
+Tomato_Bacterial_spot
