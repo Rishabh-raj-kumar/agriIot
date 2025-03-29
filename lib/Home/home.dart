@@ -5,6 +5,7 @@ import 'package:agriculture/Home/Scheduler.dart';
 import 'package:agriculture/Home/SensorData.dart';
 import 'package:agriculture/Multilanguage/Applocal.dart';
 import 'package:agriculture/Settings.dart';
+import 'package:agriculture/buisness_market/b2b.dart';
 import 'package:agriculture/course/Course.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
@@ -104,6 +105,7 @@ class _HomePageState extends State<HomePage> {
     CropDetailsPage(),
     DiseaseDetectionPage(),
     CoursePage(),
+    B2BMarketplaceApp(),
     SettingPage()
   ];
 
@@ -216,6 +218,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'Learn',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.store),
+            label: 'Marketplace',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

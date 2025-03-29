@@ -15,17 +15,17 @@ class CoursePage extends StatefulWidget {
 class _CoursePageState extends State<CoursePage> {
   late List<dynamic> crops;
   late List<dynamic> diseases;
-  late AppLocalizations localizations;
+  AppLocalizations? localizations; // Changed to nullable
 
   @override
   void initState() {
     super.initState();
     crops = json.decode(cropsDataJson)['crops'];
     diseases = json.decode(plantDiseasesDataJson)['diseases'];
-    _loadLocalization();
+    _initLocalization();
   }
 
-  Future<void> _loadLocalization() async {
+  Future<void> _initLocalization() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String languageCode = prefs.getString('language') ?? 'en';
     setState(() {
@@ -41,7 +41,7 @@ class _CoursePageState extends State<CoursePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.learn),
+        title: Text(localizations!.learn), // Use ! to assert non-null
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,7 +49,7 @@ class _CoursePageState extends State<CoursePage> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(localizations.home,
+              child: Text(localizations!.home, // Use ! to assert non-null
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold)),
             ),
@@ -70,7 +70,7 @@ class _CoursePageState extends State<CoursePage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(localizations.disease,
+              child: Text(localizations!.disease, // Use ! to assert non-null
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold)),
             ),
@@ -124,7 +124,7 @@ class _CoursePageState extends State<CoursePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    item['name'][localizations.locale.languageCode],
+                    item['name'][localizations!.locale.languageCode], // Use !
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -132,7 +132,8 @@ class _CoursePageState extends State<CoursePage> {
                   ),
                   if (isCrop)
                     Text(
-                      item['season'][localizations.locale.languageCode],
+                      item['season']
+                          [localizations!.locale.languageCode], // Use !
                       style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                 ],
@@ -149,7 +150,8 @@ class _CoursePageState extends State<CoursePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(item['name'][localizations.locale.languageCode]),
+          title:
+              Text(item['name'][localizations!.locale.languageCode]), // Use !
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,23 +159,31 @@ class _CoursePageState extends State<CoursePage> {
                 Image.asset(item['image'], fit: BoxFit.cover),
                 const SizedBox(height: 10),
                 Text(
-                  isCrop ? localizations.cropDetails : localizations.disease,
+                  isCrop
+                      ? localizations!.cropDetails
+                      : localizations!.disease, // Use !
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   isCrop
-                      ? item['details'][localizations.locale.languageCode]
-                      : item['description'][localizations.locale.languageCode],
+                      ? item['details']
+                          [localizations!.locale.languageCode] // Use !
+                      : item['description']
+                          [localizations!.locale.languageCode], // Use !
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  isCrop ? localizations.weather : localizations.tipsForFarmers,
+                  isCrop
+                      ? localizations!.weather
+                      : localizations!.tipsForFarmers, // Use !
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   isCrop
-                      ? item['season'][localizations.locale.languageCode]
-                      : item['cure'][localizations.locale.languageCode],
+                      ? item['season']
+                          [localizations!.locale.languageCode] // Use !
+                      : item['cure']
+                          [localizations!.locale.languageCode], // Use !
                 ),
                 const SizedBox(height: 10),
                 if (isCrop)
@@ -181,11 +191,11 @@ class _CoursePageState extends State<CoursePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        localizations.tipsForFarmers,
+                        localizations!.tipsForFarmers, // Use !
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(item['requirements']
-                          [localizations.locale.languageCode]),
+                          [localizations!.locale.languageCode]), // Use !
                     ],
                   ),
               ],

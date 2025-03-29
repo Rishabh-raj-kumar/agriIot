@@ -4,3 +4,4 @@ Grape_black_rot
 Maize_gray_leaf_spot
 Potato_Early_blight
 Tomato_Bacterial_spot
+Not_Plant_disease
